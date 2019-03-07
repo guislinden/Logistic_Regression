@@ -51,9 +51,9 @@ pred_cutoff_15 <- ifelse(predictions_all_full > .15, 1,0)
 # Construct a confusion matrix
 table(test_set$loan_status, pred_cutoff_15)
 
-# Classification accuracy=(TP+TN)(TP+FP+TN+FN)
-# Sensitivity=TP(TP+FN)
-# Specificity=TN(TN+FP)
+# Classification accuracy=(TP+TN)/(TP+FP+TN+FN)
+# Sensitivity=TP/(TP+FN)
+# Specificity=TN/(TN+FP)
 
 # Load the pROC-package
 #library(pROC)
@@ -65,4 +65,16 @@ plot(ROC_all_full)
 
 # Compute the AUCs
 auc(ROC_all_full)
+
+
+# novos_dados <- data.frame(loan_status = c(),
+#                     loan_amnt = c(100,200),
+#                     grade = c("A", "C") ,
+#                     home_ownership = c("RENT", "RENT") ,
+#                      annual_inc = c(1000000,5000),
+#                      age = c(30,20),
+#                     ir_cat = as.factor(c("8-11", "0-8")) ,
+#                      emp_cat = as.factor(c("0-15","0-15")))
+# 
+# predict(log_model_full, newdata = novos_dados, type = "response")
 
